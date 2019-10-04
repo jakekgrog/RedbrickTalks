@@ -22,16 +22,17 @@ export class AwsService {
     return this.httpClient.get<Task[]>(this.baseUrl + this.apiDataGet);
   }
 
-  putData(task: string) {
-    const taskData = {
+  putData(taskName: string) {
+    const task = {
       taskId: this.generateTaskId(),
-      taskName: task
+      taskName,
     };
 
-    return this.httpClient.post<{task: any}>(this.baseUrl + this.apiDataPut, taskData);
+    return this.httpClient.post<{task: any}>(this.baseUrl + this.apiDataPut, task);
   }
 
   deleteTask(taskId: string) {
+    console.log(taskId);
     return this.httpClient.post<{response: any}>(this.baseUrl + this.apiDataDelete, {taskId});
   }
 

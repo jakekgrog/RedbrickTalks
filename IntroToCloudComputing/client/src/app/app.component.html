@@ -1,36 +1,24 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!--
-<div style="text-align:center">
-  <h1>
-    Todo List
-  </h1>
-  <h6>Server - {{a}}</h6>
-  <img width="300" alt="Angular Logo" src="assets/images/redbricklogo.png">
-</div>
-<h2>Here are some links to help you start: </h2>
-<button type="button" class="btn btn-primary">Primary</button>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul> -->
-
 <nav class="navbar navbar-light" style="background-color: #fff">
   <a href="#" class="navbar-brand">
       <img width="300" src="assets/images/redbricklogo.png" alt="">
   </a>
 </nav>
 <div class="container">
-  <div class="row justify-content-center">
-      <h1>Todo List</h1>
+  <div class="row justify-content-center align-items-center">
+      <h1>Redbrick Todo List</h1>
   </div>
-  <div class="row">
+  <div class="row justify-content-center">
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" style="width:100%"  >
+      <div class="col-6 offset-3">
+        <div class="form-group">
+          <input type="text" class="form-control" id="taskName" name="taskName" placeholder="Add a task" ngModel required>
+          <br>
+          <button class="btn btn-primary" type="submit" [disabled]="!taskForm.valid">Add task</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row top-buffer">
     <div class="col-8 offset-3">
       <table style="width: 100%">
         <tr>
