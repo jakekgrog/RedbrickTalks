@@ -12,9 +12,7 @@ import { Observable } from 'rxjs';
 
 export class AppComponent implements OnInit {
   serverId: string;
-  tasks: Task[] = [
-    {taskId: '1234', taskName: 'myTask'}
-  ];
+  tasks: Task[];
 
   constructor(
     private awsService: AwsService
@@ -31,5 +29,9 @@ export class AppComponent implements OnInit {
         console.log(tasks);
         this.tasks = tasks;
       });
+  }
+
+  deleteTask(taskId) {
+    this.awsService.deleteTask(taskId);
   }
 }

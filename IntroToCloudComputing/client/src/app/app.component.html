@@ -41,7 +41,7 @@
         <tr *ngFor="let task of tasks">
           <td>{{task.taskId}}</td>
           <td>{{task.taskName}}</td>
-          <td><button class="btn btn-danger" (click)="deleteItem(item)">Delete</button></td>
+          <td><button class="btn btn-danger" (click)="deleteTask(task.taskId)">Delete</button></td>
         </tr>
       </table>
     </div>
