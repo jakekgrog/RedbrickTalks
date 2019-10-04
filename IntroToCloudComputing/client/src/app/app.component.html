@@ -1,11 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<!--
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    Todo List
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <h6>Server - {{a}}</h6>
+  <img width="300" alt="Angular Logo" src="assets/images/redbricklogo.png">
 </div>
 <h2>Here are some links to help you start: </h2>
+<button type="button" class="btn btn-primary">Primary</button>
 <ul>
   <li>
     <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
@@ -16,6 +19,33 @@
   <li>
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
-</ul>
+</ul> -->
+
+<nav class="navbar navbar-light" style="background-color: #fff">
+  <a href="#" class="navbar-brand">
+      <img width="300" src="assets/images/redbricklogo.png" alt="">
+  </a>
+</nav>
+<div class="container">
+  <div class="row justify-content-center">
+      <h1>Todo List</h1>
+  </div>
+  <div class="row">
+    <div class="col-8 offset-3">
+      <table style="width: 100%">
+        <tr>
+          <th>Task Id</th>
+          <th>Task Name</th>
+          <th>Actions</th>
+        </tr>
+        <tr *ngFor="let task of tasks">
+          <td>{{task.taskId}}</td>
+          <td>{{task.taskName}}</td>
+          <td><button class="btn btn-danger" (click)="deleteItem(item)">Delete</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 
 <router-outlet></router-outlet>
