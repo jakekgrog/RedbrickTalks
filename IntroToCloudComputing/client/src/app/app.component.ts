@@ -28,28 +28,21 @@ export class AppComponent implements OnInit {
     const taskName = form.value.taskName;
 
     this.awsService
-      .putData(taskName)
-      .subscribe((response: any) => {
-        console.log(response);
-      });
+      .putData(taskName);
     this.getTasks();
   }
 
   getTasks() {
     this.awsService
       .getData()
-      .subscribe((tasks: Task[]) => {
-        console.log(tasks);
-        this.tasks = tasks;
+      .subscribe((tasks: any) => {
+        this.tasks = tasks.Items;
       });
   }
 
   deleteTask(taskId) {
     this.awsService
-      .deleteTask(taskId)
-      .subscribe((response: any) => {
-        console.log(response);
-      });
+      .deleteTask(taskId);
     this.getTasks();
   }
 }

@@ -1,39 +1,62 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, from } from 'rxjs';
 import { ApiEndpoints } from '../config/api-endpoints';
 import { Task } from '../models/task';
+import * as AWS from 'aws-sdk';
+
+AWS.config.update({
+  region: 'eu-west-1'
+});
+
+const ddb = new AWS.DynamoDB.DocumentClient();
 
 @Injectable({
   providedIn: 'root'
 })
 export class AwsService {
-  private baseUrl = ApiEndpoints.apiUrl;
-  private apiDataGet = ApiEndpoints.apiDataGet;
-  private apiDataPut = ApiEndpoints.apiDataPut;
-  private apiDataDelete = ApiEndpoints.apiDataDelete;
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
 
-  getData(): Observable<Task[]> {
-    return this.httpClient.get<Task[]>(this.baseUrl + this.apiDataGet);
+  getData(): Observable<any> {
+
+    const params = {
+      TableName: 'TaskTable',
+    };
+
+    return from(ddb.scan(params).promise());
+
   }
 
-  putData(taskName: string) {
+  async putData(taskName: string) {
     const task = {
       taskId: this.generateTaskId(),
       taskName,
     };
 
-    return this.httpClient.post<{task: any}>(this.baseUrl + this.apiDataPut, task);
+    const params = {
+      TableName: 'TaskTable',
+      Item: task
+    };
+
+    await ddb.put(params).promise();
+
   }
 
-  deleteTask(taskId: string) {
-    console.log(taskId);
-    return this.httpClient.post<{response: any}>(this.baseUrl + this.apiDataDelete, {taskId});
+  async deleteTask(taskId: string) {
+
+    const params = {
+      TableName: 'TaskTable',
+      Key: {
+        taskId
+      }
+    };
+
+    await ddb.delete(params).promise();
+    return;
   }
 
   private generateTaskId() {
