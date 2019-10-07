@@ -6,7 +6,9 @@ import { Task } from '../models/task';
 import * as AWS from 'aws-sdk';
 
 AWS.config.update({
-  region: 'eu-west-1'
+  region: 'eu-west-1',
+  accessKeyId: 'ACCESSKEY',
+  secretAccessKey: 'SECRETKEY'
 });
 
 const ddb = new AWS.DynamoDB.DocumentClient();
